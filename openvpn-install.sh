@@ -302,7 +302,6 @@ persist-tun
 status openvpn-status.log
 verb 3
 fast-io
-pull
 route-delay 2
 redirect-gateway
 crl-verify crl.pem" >> /etc/openvpn/server.conf
@@ -391,7 +390,6 @@ comp-lzo
 setenv opt block-outside-dns
 key-direction 1
 fast-io
-pull
 route-delay 2
 redirect-gateway
 verb 3" > /etc/openvpn/client-common.txt
