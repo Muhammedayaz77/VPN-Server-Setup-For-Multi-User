@@ -302,8 +302,6 @@ persist-tun
 status openvpn-status.log
 verb 3
 fast-io
-route-delay 2
-redirect-gateway
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
 	echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/30-openvpn-forward.conf
@@ -390,8 +388,6 @@ comp-lzo
 setenv opt block-outside-dns
 key-direction 1
 fast-io
-route-delay 2
-redirect-gateway
 verb 3" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "$CLIENT"
