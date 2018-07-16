@@ -391,7 +391,7 @@ remote-cert-tls server
 auth SHA512
 cipher AES-256-CBC
 comp-lzo
-#setenv opt block-outside-dns
+setenv opt block-outside-dns
 key-direction 1
 fast-io
 pull
