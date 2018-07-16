@@ -261,7 +261,6 @@ topology subnet
 server 10.8.0.0 255.255.255.0
 fast-io
 pull
-route-delay 2
 
 ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
@@ -309,7 +308,6 @@ status openvpn-status.log
 verb 3
 fast-io
 pull
-route-delay 2
 redirect-gateway
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
@@ -397,7 +395,6 @@ comp-lzo
 #setenv opt block-outside-dns
 key-direction 1
 fast-io
-route-delay 2
 pull
 redirect-gateway
 verb 3" > /etc/openvpn/client-common.txt
