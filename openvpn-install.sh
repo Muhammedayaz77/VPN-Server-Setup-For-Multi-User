@@ -6,11 +6,13 @@ if readlink /proc/$$/exe | grep -q "dash"; then
 	exit
 fi
 
+# Verify root
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Sorry, you need to run this as root"
 	exit
 fi
 
+# Verify tun
 if [[ ! -e /dev/net/tun ]]; then
 	echo "The TUN device is not available
 You need to enable TUN before running this script"
@@ -257,6 +259,10 @@ auth SHA512
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0
+fast-io
+pull
+route-delay 2
+
 ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
 	# DNS
@@ -302,6 +308,9 @@ persist-tun
 status openvpn-status.log
 verb 3
 fast-io
+pull
+route-delay 2
+redirect-gateway
 crl-verify crl.pem" >> /etc/openvpn/server.conf
 	# Enable net.ipv4.ip_forward for the system
 	echo 'net.ipv4.ip_forward=1' > /etc/sysctl.d/30-openvpn-forward.conf
@@ -385,9 +394,12 @@ remote-cert-tls server
 auth SHA512
 cipher AES-256-CBC
 comp-lzo
-setenv opt block-outside-dns
+#setenv opt block-outside-dns
 key-direction 1
 fast-io
+route-delay 2
+pull
+redirect-gateway
 verb 3" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "$CLIENT"
